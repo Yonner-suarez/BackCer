@@ -15,6 +15,8 @@ const confirmacionDePago = async (payment) => {
       const obtenerStatus = await mercadopago.payment.findById(
         payment["data.id"]
       );
+
+      console.log(mercadopago.payment.schema.properties.payer.properties);
       let mailOptions = {
         from: "casaeuropeaderepuestos@gmail.com",
         to: "yonnerhazziel@gmail.com",
@@ -31,6 +33,7 @@ const confirmacionDePago = async (payment) => {
           return "Correo electrónico enviado: " + info.response;
         }
       });
+      return obtenerStatus.status;
     }
   } catch (error) {
     return error;

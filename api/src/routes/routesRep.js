@@ -17,12 +17,14 @@ RouterRep.get("/", async (req, res) => {
 
 //?Agrega un repuesto
 RouterRep.post("/", async (req, res) => {
-  const { nombre, imagen, precio, calificacion, marca, marcaReps } = req.body;
+  const { nombre, imagen, precio, marca, marcaReps } = req.body;
 
-  if (
-    ![nombre, imagen, precio, calificacion, marca, marcaReps].every(Boolean)
-  ) {
-    res.status(404).json({ message: "Faltan datos para hacer el proceso" });
+  console.log(req.body);
+  console.log(![nombre, imagen, precio, marca, marcaReps].every(Boolean));
+  if (![nombre, imagen, precio, marca, marcaReps].every(Boolean)) {
+    return res
+      .status(404)
+      .json({ message: "Faltan datos para hacer el proceso" });
   }
 
   try {
@@ -30,10 +32,10 @@ RouterRep.post("/", async (req, res) => {
       nombre,
       imagen,
       precio,
-      calificacion,
       marca,
       marcaReps,
     });
+    console.log(nuevoRepuesto);
     res.status(200).json(nuevoRepuesto);
   } catch (error) {
     res.status(404).json({ message: error.message });

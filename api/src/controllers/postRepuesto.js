@@ -7,14 +7,7 @@ cloudinary.config({
   api_secret: "a4-8MavrZ8XMT1Of9LfcW1PRLr0",
 });
 
-const postRepuesto = async ({
-  nombre,
-  imagen,
-  precio,
-  calificacion,
-  marca,
-  marcaReps,
-}) => {
+const postRepuesto = async ({ nombre, imagen, precio, marca, marcaReps }) => {
   try {
     const resp = cloudinary.uploader.upload(imagen, {
       public_id: nombre,
@@ -44,13 +37,13 @@ const postRepuesto = async ({
       },
     });
 
+    console.log(nombre, url, precio);
     const nuevoRepuesto = await Repuesto.create({
       nombre: nombre,
       imagen: url,
       precio: precio,
-      calificacion: calificacion,
-      descripcion: descripcion,
     });
+
     await nuevoRepuesto.addMarcas(marcaCarro);
     await nuevoRepuesto.setMarcaRep(marcaRepuesto);
 

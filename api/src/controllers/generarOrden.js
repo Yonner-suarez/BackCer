@@ -5,18 +5,7 @@ mercadopago.configure({
     "TEST-337264305447969-052614-1a8550f94f6f169b0947602117976077-1383343081",
 });
 
-let producto = [
-  {
-    name: "holias",
-    precio: "2.666",
-  },
-  {
-    name: "jujis",
-    precio: "2.866",
-  },
-];
-
-const generarOrden = async () => {
+const generarOrden = async (producto) => {
   let preference = {
     items: producto.map((rep) => {
       let number = parseFloat(rep.precio.replace(/\./g, "").replace(",", "."));
@@ -28,16 +17,18 @@ const generarOrden = async () => {
       };
     }),
     back_urls: {
-      success: "https://page-cer.vercel.app/",
+      success: "http://localhost:5173/",
       pending: "http://localhost:3000/pending",
       failure: "http://localhost:3000/failure",
     },
-    notification_url:
-      "https://backcer-production.up.railway.app/confirmacionDePago",
+    notification_url: "https://7e49-45-65-234-48.ngrok.io/confirmacionDePago",
     binary_mode: true,
     auto_return: "approved",
     expires: true,
     installments: 1,
+    payer: {
+      email: "yonnerhazziel@gmail.com",
+    },
   };
 
   try {
