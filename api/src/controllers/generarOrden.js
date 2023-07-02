@@ -13,27 +13,23 @@ const generarOrden = async (producto) => {
         tiitle: rep.nombre,
         unit_price: number,
         currency_id: "COP",
-        quantity: 1,
+        quantity: rep.cantidad,
       };
     }),
     back_urls: {
-      success: "http://localhost:5173/",
-      pending: "http://localhost:3000/pending",
-      failure: "http://localhost:3000/failure",
+      success: "https://page-cer.vercel.app/success",
+      pending: "https://page-cer.vercel.app/pending",
+      failure: "https://page-cer.vercel.app/failure",
     },
-    notification_url: "https://7e49-45-65-234-48.ngrok.io/confirmacionDePago",
+    notification_url: "https://backcer.onrender.com/confirmacionDePago",
     binary_mode: true,
     auto_return: "approved",
     expires: true,
     installments: 1,
-    payer: {
-      email: "yonnerhazziel@gmail.com",
-    },
   };
 
   try {
     const peticionOrden = await mercadopago.preferences.create(preference);
-
     return peticionOrden.body.init_point;
   } catch (error) {
     return error;

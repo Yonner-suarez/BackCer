@@ -16,10 +16,10 @@ const confirmacionDePago = async (payment) => {
         payment["data.id"]
       );
 
-      console.log(mercadopago.payment.schema.properties.payer.properties);
+      // console.log(obtenerStatus.response.payer.email);
       let mailOptions = {
         from: "casaeuropeaderepuestos@gmail.com",
-        to: "yonnerhazziel@gmail.com",
+        to: obtenerStatus.response.payer.email,
         subject: "Compra Exitosa",
         text: "Hola, esto es un correo de prueba enviado con Nodemailer.",
         html: "<b>Hola,</b><br>Esto es un correo de prueba enviado con <strong>Nodemailer</strong>.",
